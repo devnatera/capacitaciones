@@ -1,11 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.content')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+@section('content-page')
+    <div class="row justify-content-center m-0">
+        <div class="col-md-10">
+            <div class="card m-0">
+                <div class="card-header">Bienvenido {{ Auth::user()->name }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -14,10 +13,8 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection
