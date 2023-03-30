@@ -33,23 +33,30 @@ class CapacitacionController extends Controller
     {
         $data = $request->validated();
 
+        $capacitacion = new Capacitacion($data);
+
         try {
-            $capacitacion = new Capacitacion($data);
+            $dia_semana = date('w', strtotime($capacitacion->fecha));
+
+            if ($dia_semana < 1 )
+                throw new \Exception("No se puede crear una capacitación el día Domingo");
+
+            if ($dia_semana > 5 )
+                throw new \Exception("No se puede crear una capacitación el día Sabado");
+
+        } catch (\Throwable $e) {
+            return back()->withErrors(['error' => $e->getMessage()]);
+        }
+
+        try {
 
             $capacitacion->saveOrFail();
 
             return redirect('capacitaciones')->with('notifications', 'Capacitación creada');
+
         } catch (\Throwable $e) {
             return redirect('capacitaciones')->withErrors(['error' => $e->getMessage()]);
         }
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
     }
 
     /**
@@ -84,6 +91,17 @@ class CapacitacionController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+
+        try {
+            $capacitacion = Capacitacion::find($id);
+
+            $capacitacion->estado = false;
+
+            $capacitacion->saveOrFail();
+
+            return redirect('capacitaciones')->with('notifications', 'Capacitación Inactivada');
+        } catch (\Throwable $e) {
+            return redirect('capacitaciones')->withErrors(['error' => $e->getMessage()]);
+        }
     }
 }

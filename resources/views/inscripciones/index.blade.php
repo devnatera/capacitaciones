@@ -41,7 +41,6 @@
                                         <br><i class="bi bi-calendar-check pe-2"></i> {{$capacitacion->fecha}}
                                         <br><i class="bi bi-hourglass-top pe-2"></i> {{$capacitacion->hora_inicio}}
                                         <br><i class="bi bi-hourglass-bottom pe-2"></i></i> {{$capacitacion->hora_fin}}
-                                        <br><i class="bi bi-layers-fill pe-2"></i> {{$capacitacion->estado ? 'Activa' : 'Inactiva' }}
 
                                     </div>
                                     <div class="card-footer">

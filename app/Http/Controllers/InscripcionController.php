@@ -24,6 +24,7 @@ class InscripcionController extends Controller
                 'ins.asistencia',
                 DB::raw('(cap.cupo - cap.numero_inscripciones) AS cupo_disponible')
             )
+            ->where('cap.estado', '<>', 0)
             ->orderByDesc('cap.fecha')
             ->get();
 
@@ -98,7 +99,7 @@ class InscripcionController extends Controller
                 $capacitacion->saveOrFail();
             });
 
-            return redirect('inscripciones')->with('notifications', 'Inscripción correcta');
+            return redirect('inscripciones')->with('notifications', 'Capacitacion Incativada');
 
         } catch (\Throwable $e) {
             return redirect('inscripciones')->withErrors(['error' => $e->getMessage()]);

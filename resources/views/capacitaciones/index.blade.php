@@ -30,7 +30,7 @@
 
                     <div class="row">
                         @foreach($capacitaciones as $capacitacion)
-                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-2">
+                            <div class="col-12 col-sm-12 col-md-4 col-lg-3 mb-2">
                                 <div class="card">
                                     <div class="card-header bg-dark bg-gradient text-white">
                                         <span class="fs-5">Capacitación</span>
@@ -48,19 +48,27 @@
 
                                     </div>
                                     <div class="card-footer">
-                                        <div class="d-flex justify-content-between align-items-baseline">
+                                        <div class="d-flex align-content-between align-items-baseline">
                                             <form action="{{ route('capacitaciones.destroy',$capacitacion->id) }}"
                                                   method="POST" style="min-width: 80px;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm">
+                                                <button type="submit" class="btn btn-danger btn-sm"
+                                                        @if(!$capacitacion->estado)
+                                                            disabled
+                                                        @endif
+                                                >
                                                     <i class="bi bi-trash3"></i>
+                                                    <span class="d-none d-sm-none d-md-none d-lg-inline">Inactivar</span>
                                                 </button>
                                                 {{-- Edit --}}
-                                                <a class="btn btn-primary btn-sm"
-                                                   href="{{ route('capacitaciones.edit', $capacitacion->id) }}">
-                                                    <i class="bi bi-pencil-square"></i>
-                                                </a>
+                                                @if($capacitacion->estado && $capacitacion->fecha >= date('Y-m-d'))
+                                                    <a class="btn btn-primary btn-sm"
+                                                       href="{{ route('capacitaciones.edit', $capacitacion->id) }}">
+                                                        <i class="bi bi-pencil-square"></i>
+                                                        <span class="d-none d-sm-none d-md-none d-lg-inline">Editar</span>
+                                                    </a>
+                                                @endif
                                             </form>
                                         </div>
                                     </div>
