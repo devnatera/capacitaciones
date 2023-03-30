@@ -14,6 +14,7 @@ class Capacitacion extends Model
     protected $fillable = [
         'nombre',
         'cupo',
+        'numero_inscripciones',
         'fecha',
         'hora_inicio',
         'hora_fin',

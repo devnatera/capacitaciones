@@ -15,5 +15,11 @@
                 </a>
             </li>
         @endif
+        <li class="nav-item">
+            <a href="{{ url('inscripciones') }}"
+               class="nav-link {{request()->is('inscripciones') || request()->is('inscripciones/*') ? 'active': 'link-dark'}}">
+                <i class="bi bi-buildings-fill"></i><span class="ms-2">Inscripciones</span>
+            </a>
+        </li>
     </ul>
 </div>

@@ -6,10 +6,7 @@
             <div class="card m-0">
                 <div class="card-header">
                     <div class="d-flex justify-content-between align-items-baseline">
-                        <span class="fs-3">Capacitaciones</span>
-                        <a href="{{ route('capacitaciones.create') }}" class="btn btn-outline-success fs-5">
-                            <i class="bi bi-plus-circle-dotted"></i>
-                        </a>
+                        <span class="fs-3">Inscripciones a capacitaciones</span>
                     </div>
                 </div>
                 <div class="card-body">
@@ -49,18 +46,29 @@
                                     </div>
                                     <div class="card-footer">
                                         <div class="d-flex justify-content-between align-items-baseline">
-                                            <form action="{{ route('capacitaciones.destroy',$capacitacion->id) }}"
+                                            <form action="{{ route('inscripciones.update',(int)$capacitacion->id) }}"
+                                                  method="POST" style="min-width: 80px;">
+                                                @csrf
+                                                @method('PUT')
+                                                <button type="submit" class="btn btn-success btn-sm"
+                                                        @if($capacitacion->asistencia || ($capacitacion->cupo_disponible < 1))
+                                                            disabled
+                                                        @endif
+                                                >
+                                                    <i class="bi bi-check-square"></i> Confirmar asistencia
+                                                </button>
+                                            </form>
+                                            <form action="{{ route('inscripciones.destroy',$capacitacion->id) }}"
                                                   method="POST" style="min-width: 80px;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm">
-                                                    <i class="bi bi-trash3"></i>
+                                                <button type="submit" class="btn btn-danger btn-sm"
+                                                        @if(!$capacitacion->asistencia)
+                                                            disabled
+                                                        @endif
+                                                >
+                                                    <i class="bi bi-trash3"></i> Cancelar asistencia
                                                 </button>
-                                                {{-- Edit --}}
-                                                <a class="btn btn-primary btn-sm"
-                                                   href="{{ route('capacitaciones.edit', $capacitacion->id) }}">
-                                                    <i class="bi bi-pencil-square"></i>
-                                                </a>
                                             </form>
                                         </div>
                                     </div>

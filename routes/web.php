@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CapacitacionController;
+use App\Http\Controllers\InscripcionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -26,4 +27,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::middleware(['auth'])->group(function () {
 
     Route::resource('capacitaciones', CapacitacionController::class)->except(['show']);
+    Route::resource('inscripciones', InscripcionController::class)->only(['index', 'update', 'destroy']);
 });

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nombre');
             $table->integer('cupo');
+            $table->integer('numero_inscripciones')->default(0);
             $table->date('fecha');
             $table->time('hora_inicio');
             $table->time('hora_fin');
