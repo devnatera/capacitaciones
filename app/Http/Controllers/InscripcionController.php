@@ -58,7 +58,7 @@ class InscripcionController extends Controller
                 throw new \Exception("Esta capacitación no tiene fecha Vigente");
             }
 
-            if ($capacitacion->hora_fin < $hora_actual) {
+            if ($capacitacion->fecha == $fecha_actual && $capacitacion->hora_fin < $hora_actual) {
                 throw new \Exception("Esta capacitación ya finalizo");
             }
 
